@@ -4,6 +4,9 @@ import Register from "../views/auth/Register";
 import Login from "../views/auth/Login";
 import UserProfile from "../views/pages/UserProfile";
 import Dashboard from "../views/pages/Dashboard";
+import About from "../views/pages/About";
+import News from "../views/pages/News";
+import Posters from "../views/pages/Posters";
 import middleware from "../middleware/middleware";
 import store from "../store";
 import middlewarePipeline from "../router/middlewarePipeline";
@@ -28,9 +31,24 @@ const routes = [
         path: '/dashboard',
         name: Dashboard,
         component: Dashboard,
-        // meta: {
-        //     middleware: [middleware.auth]
-        // }
+        meta: {
+            middleware: [middleware.auth]
+        }
+    },
+    {
+        path: '/about',
+        name: About,
+        component: About
+    },
+    {
+        path: '/news',
+        name: News,
+        component: News
+    },
+    {
+        path: '/posters',
+        name: Posters,
+        component: Posters
     },
     {
         path: '/profile',

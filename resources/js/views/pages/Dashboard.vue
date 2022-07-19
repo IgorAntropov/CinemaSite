@@ -1,5 +1,11 @@
 <template>
-<h1>Dashboard</h1>
+    <custom-header></custom-header>
+
+    <div class="container flex-center">
+        Dashboard
+    </div>
+
+    <custom-footer></custom-footer>
 </template>
 
 <script>
@@ -8,6 +14,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

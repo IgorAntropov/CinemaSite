@@ -2,7 +2,7 @@
     <custom-header></custom-header>
 
     <div class="container flex-center">
-
+        Posters
     </div>
 
     <custom-footer></custom-footer>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    name: 'Container'
+    name: "Posters"
 }
 </script>
 

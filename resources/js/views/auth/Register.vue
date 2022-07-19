@@ -6,8 +6,8 @@
                 <custom-input type="text" placeholder="E-mail" v-model="user.email" />
                 <custom-input type="text" placeholder="Password" v-model="user.password" />
                 <custom-input type="text" placeholder="Password" v-model="user.password_confirmation" />
-                <custom-button type="submit" @click.prevent="register">register</custom-button >
-                <router-link to="/login"> <p class="message">Already registered? <a href="#">Sing In</a></p> </router-link>
+                <custom-button type="submit" @click.prevent="register">Регистрация</custom-button >
+                <router-link to="/login"> <p class="message">Уже зарегистрирован? <a href="#">Войди!</a></p> </router-link>
             </form>
         </div>
     </div>

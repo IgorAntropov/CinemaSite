@@ -40,10 +40,28 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100vh;
+    margin: 0!important;
 }
 
 .flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container {
+    background-color: var(--color-white-light);
+    box-shadow: var(--shadow-dark);
+    flex-direction: column;
+    min-height: calc(100vh - 150px);
+    min-width: calc(100vw - 50px);
+    margin-bottom: 75px;
 }

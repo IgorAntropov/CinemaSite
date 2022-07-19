@@ -10,6 +10,8 @@ import router from "./router/router";
 import components from "./components/common";
 import store from "./store";
 
+import 'material-icons/iconfont/material-icons.css';
+
 const app = createApp({});
 /**
  * The following block of code may be used to automatically register your

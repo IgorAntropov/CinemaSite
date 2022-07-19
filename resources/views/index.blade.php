@@ -7,7 +7,7 @@
     >
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="/css/app.css" rel="stylesheet">
-    <title>Cinema site</title>
+    <title>Кинодом</title>
 </head>
 <body>
 <div id="app">

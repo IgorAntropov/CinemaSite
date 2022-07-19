@@ -4,9 +4,9 @@
         <form>
             <custom-input type="text" placeholder="E-mail" v-model="user.email" />
             <custom-input type="text" placeholder="Password" v-model="user.password" />
-            <custom-button type="submit" @click.prevent="login">Login</custom-button>
+            <custom-button type="submit" @click.prevent="login">Войти</custom-button>
             <router-link to="/register" class="new-acc">
-                <p class="message">Not registered? <a href="#">Create an account</a> </p>
+                <p class="message">Не зарегистрирован? <a href="#">Создай аккаунт!</a> </p>
             </router-link>
         </form>
     </div>
