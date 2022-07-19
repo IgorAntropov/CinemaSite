@@ -2,11 +2,11 @@ import axios from "axios";
 
 const state = {
     userDetails: {},
-    isLoggedIn: true
+    isLoggedIn: false
 }
 
 const actions = {
-    registerUser({commit}, user) {
+    registerUser(ctx, user) {
         return new Promise((resolve, reject) => {
             axios
                 .post('/api/register', {
@@ -28,7 +28,7 @@ const actions = {
                 })
         });
     },
-    loginUser({commit}, payload) {
+    loginUser(ctx, payload) {
         return new Promise((resolve, reject) => {
             axios
                 .post('/api/login', payload)
@@ -36,7 +36,7 @@ const actions = {
                     if (response.data.access_token) {
                         localStorage.setItem('token', response.data.access_token);
                         window.location.replace('/dashboard');
-                        commit('LOGGED', true);
+                        ctx.commit('LOGGED', true);
                         resolve(response);
                     } else {
                         reject(response);
@@ -48,13 +48,21 @@ const actions = {
 
         });
     },
-    logout({commit}) {
+    logout(ctx) {
         return new Promise((resolve) => {
             localStorage.removeItem('token');
-            commit('LOGGED', false);
+            ctx.commit('LOGGED', false);
             resolve(true);
             window.location.replace('/login');
         });
+    },
+    setLoggedInState(ctx) {
+        return new Promise((resolve) => {
+            let hasToken = !!localStorage.getItem('token');
+
+            ctx.commit('LOGGED', hasToken);
+            resolve(hasToken);
+        })
     }
 }
 

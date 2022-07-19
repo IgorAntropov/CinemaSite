@@ -27,9 +27,15 @@
 <script>
 export default {
     name: "custom-header",
+    created() {
+        this.checkUserState();
+    },
     methods: {
         logout() {
             this.$store.dispatch('auth/logout');
+        },
+        checkUserState() {
+            this.$store.dispatch('auth/setLoggedInState');
         }
     }
 }

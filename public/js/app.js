@@ -19795,9 +19795,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "custom-header",
+  created: function created() {
+    this.checkUserState();
+  },
   methods: {
     logout: function logout() {
       this.$store.dispatch('auth/logout');
+    },
+    checkUserState: function checkUserState() {
+      this.$store.dispatch('auth/setLoggedInState');
     }
   }
 });
@@ -19850,9 +19856,15 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  created: function created() {
+    this.checkUserState();
+  },
   methods: {
     login: function login() {
       this.$store.dispatch('auth/loginUser', this.user);
+    },
+    checkUserState: function checkUserState() {
+      this.$store.dispatch('auth/setLoggedInState');
     }
   }
 });
@@ -20997,11 +21009,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var state = {
   userDetails: {},
-  isLoggedIn: true
+  isLoggedIn: false
 };
 var actions = {
-  registerUser: function registerUser(_ref, user) {
-    var commit = _ref.commit;
+  registerUser: function registerUser(ctx, user) {
     return new Promise(function (resolve, reject) {
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/register', {
         name: user.name,
@@ -21020,14 +21031,13 @@ var actions = {
       });
     });
   },
-  loginUser: function loginUser(_ref2, payload) {
-    var commit = _ref2.commit;
+  loginUser: function loginUser(ctx, payload) {
     return new Promise(function (resolve, reject) {
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/login', payload).then(function (response) {
         if (response.data.access_token) {
           localStorage.setItem('token', response.data.access_token);
           window.location.replace('/dashboard');
-          commit('LOGGED', true);
+          ctx.commit('LOGGED', true);
           resolve(response);
         } else {
           reject(response);
@@ -21037,13 +21047,19 @@ var actions = {
       });
     });
   },
-  logout: function logout(_ref3) {
-    var commit = _ref3.commit;
+  logout: function logout(ctx) {
     return new Promise(function (resolve) {
       localStorage.removeItem('token');
-      commit('LOGGED', false);
+      ctx.commit('LOGGED', false);
       resolve(true);
       window.location.replace('/login');
+    });
+  },
+  setLoggedInState: function setLoggedInState(ctx) {
+    return new Promise(function (resolve) {
+      var hasToken = !!localStorage.getItem('token');
+      ctx.commit('LOGGED', hasToken);
+      resolve(hasToken);
     });
   }
 };
