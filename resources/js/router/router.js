@@ -7,6 +7,8 @@ import Dashboard from "../views/pages/Dashboard";
 import About from "../views/pages/About";
 import News from "../views/pages/News";
 import Posters from "../views/pages/Posters";
+import ResetPassword from "../views/auth/ResetPassword";
+import ForgotPassword from "../views/auth/ForgotPassword";
 import middleware from "../middleware/middleware";
 import store from "../store";
 import middlewarePipeline from "../router/middlewarePipeline";
@@ -54,9 +56,19 @@ const routes = [
         path: '/profile',
         name: UserProfile,
         component: UserProfile,
-        // meta: {
-        //     middleware: [middleware.auth, middleware.isSubscribed]
-        // }
+        meta: {
+            middleware: [middleware.auth]
+        }
+    },
+    {
+        path: '/forgot-password',
+        name: ForgotPassword,
+        component: ForgotPassword
+    },
+    {
+        path: '/reset-password/:token',
+        name: ResetPassword,
+        component: ResetPassword
     }
 ];
 

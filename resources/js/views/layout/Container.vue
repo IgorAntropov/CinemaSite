@@ -2,7 +2,7 @@
     <custom-header></custom-header>
 
     <div class="container flex-center">
-
+        <slot></slot>
     </div>
 
     <custom-footer></custom-footer>

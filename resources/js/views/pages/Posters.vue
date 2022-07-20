@@ -1,16 +1,17 @@
 <template>
-    <custom-header></custom-header>
-
-    <div class="container flex-center">
+    <Container>
         Posters
-    </div>
-
-    <custom-footer></custom-footer>
+    </Container>
 </template>
 
 <script>
+import Container from "../layout/Container";
+
 export default {
-    name: "Posters"
+    name: "Posters",
+    components: {
+        Container
+    }
 }
 </script>
 

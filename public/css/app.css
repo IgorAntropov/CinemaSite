@@ -55,6 +55,39 @@ body {
   box-shadow: var(--shadow-dark);
   flex-direction: column;
   min-height: calc(100vh - 150px);
+  max-height: calc(100vh - 150px);
   min-width: calc(100vw - 50px);
   margin-bottom: 75px;
+  overflow-y: auto;
+}
+
+.auth-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+  display: flex;
+}
+
+.auth-page form {
+  position: relative;
+  z-index: 1;
+  background-color: var(--color-modal-background);
+  background-position: center;
+  background-size: cover;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.auth-page form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: var(--color-white-light);
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px !important;
+  box-sizing: border-box;
+  font-size: 14px;
 }

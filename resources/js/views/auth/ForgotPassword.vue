@@ -5,14 +5,8 @@
         <div class="auth-page">
             <form>
                 <custom-input type="text" placeholder="E-mail" v-model="user.email"/>
-                <custom-input type="text" placeholder="Пароль" v-model="user.password"/>
-                <custom-button type="submit" @click.prevent="login">Войти</custom-button>
-                <router-link to="/register" class="new-acc">
-                    <p class="message">Не зарегистрирован? <a href="#">Создай аккаунт!</a></p>
-                </router-link>
-                <router-link to="/forgot-password" class="new-acc">
-                    <p class="message">Забыл пароль? <a href="#">Восстановить пароль</a></p>
-                </router-link>
+                <custom-button type="submit" @click.prevent="forgot">Восстановить пароль</custom-button>
+                <router-link to="/login"> <p class="message">На страницу авторизации? <a href="#">Войти</a></p> </router-link>
             </form>
         </div>
     </div>
@@ -22,18 +16,14 @@
 import { mapGetters } from 'vuex';
 
 export default {
-    name: "Login",
+    name: "ForgotPassword",
     data: () => ({
         user: {
-            email: '',
-            password: ''
+            email: ''
         },
         isVisibleErrors: false,
         arrErrors: []
     }),
-    created() {
-        this.checkUserState();
-    },
     computed: {
         ...mapGetters({
             invalidData: 'auth/invalidData',
@@ -41,12 +31,9 @@ export default {
         })
     },
     methods: {
-        login() {
-            this.$store.dispatch('auth/loginUser', this.user);
+        forgot() {
+            this.$store.dispatch('auth/forgotPassword', this.user);
             this.visibleErrors();
-        },
-        checkUserState() {
-            this.$store.dispatch('auth/setLoggedInState');
         },
         getAllErrors() {
             let allErrors = this.errors;

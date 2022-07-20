@@ -1,11 +1,13 @@
 <template>
     <div>
-        <div class="register-page">
+        <custom-validation-notification v-if="isVisibleErrors" :errors="arrErrors"></custom-validation-notification>
+
+        <div class="auth-page">
             <form>
-                <custom-input type="text" placeholder="User name" v-model="user.name" />
+                <custom-input type="text" placeholder="Имя пользователя" v-model="user.name" />
                 <custom-input type="text" placeholder="E-mail" v-model="user.email" />
-                <custom-input type="text" placeholder="Password" v-model="user.password" />
-                <custom-input type="text" placeholder="Password" v-model="user.password_confirmation" />
+                <custom-input type="text" placeholder="Пароль" v-model="user.password" />
+                <custom-input type="text" placeholder="Подтвердите пароль" v-model="user.password_confirmation" />
                 <custom-button type="submit" @click.prevent="register">Регистрация</custom-button >
                 <router-link to="/login"> <p class="message">Уже зарегистрирован? <a href="#">Войди!</a></p> </router-link>
             </form>
@@ -14,6 +16,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     name: "Register",
     data: () => ({
@@ -22,49 +26,39 @@ export default {
             email: "",
             password: "",
             password_confirmation: ""
-        }
+        },
+        isVisibleErrors: false,
+        arrErrors: []
     }),
+    computed: {
+        ...mapGetters({
+            invalidData: 'auth/invalidData',
+            errors: 'auth/errors'
+        })
+    },
     methods: {
         register() {
-            console.log(this.user)
             this.$store.dispatch('auth/registerUser', this.user);
+            this.visibleErrors();
+        },
+        getAllErrors() {
+            let allErrors = this.errors;
+
+            if (this.invalidData) {
+                allErrors.push(this.invalidData);
+            }
+
+            return allErrors;
+        },
+        visibleErrors() {
+            this.arrErrors = this.getAllErrors();
+            this.isVisibleErrors = this.arrErrors.length !== 0;
         }
     }
 }
 </script>
 
 <style scoped lang="scss">
-.register-page {
-    width: 360px;
-    padding: 8% 0 0;
-    margin: auto;
-    display: flex;
-}
-
-form {
-    position: relative;
-    z-index: 1;
-    background-color: var(--color-modal-background);
-    background-size: cover;
-    background-position: center;
-    max-width: 360px;
-    margin: 0 auto 100px;
-    padding: 45px;
-    text-align: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5), 0 5px 0 rgba(0, 0, 0, 0.2);
-}
-
-form input {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px!important;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
 form .message {
     margin: 15px;
     color: #b3b3b3;

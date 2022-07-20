@@ -5,35 +5,29 @@
         <div class="auth-page">
             <form>
                 <custom-input type="text" placeholder="E-mail" v-model="user.email"/>
-                <custom-input type="text" placeholder="Пароль" v-model="user.password"/>
-                <custom-button type="submit" @click.prevent="login">Войти</custom-button>
-                <router-link to="/register" class="new-acc">
-                    <p class="message">Не зарегистрирован? <a href="#">Создай аккаунт!</a></p>
-                </router-link>
-                <router-link to="/forgot-password" class="new-acc">
-                    <p class="message">Забыл пароль? <a href="#">Восстановить пароль</a></p>
-                </router-link>
+                <custom-input type="text" placeholder="Новый пароль" v-model="user.password" />
+                <custom-input type="text" placeholder="Подтвердите пароль" v-model="user.password_confirmation" />
+                <custom-button type="submit" @click.prevent="reset">Сбросить пароль</custom-button>
+                <router-link to="/login"> <p class="message">На страницу авторизации? <a href="#">Войти</a></p> </router-link>
             </form>
         </div>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
-    name: "Login",
+    name: "ResetPassword",
     data: () => ({
         user: {
             email: '',
-            password: ''
+            password: '',
+            password_confirmation: ''
         },
         isVisibleErrors: false,
         arrErrors: []
     }),
-    created() {
-        this.checkUserState();
-    },
     computed: {
         ...mapGetters({
             invalidData: 'auth/invalidData',
@@ -41,12 +35,13 @@ export default {
         })
     },
     methods: {
-        login() {
-            this.$store.dispatch('auth/loginUser', this.user);
+        ...mapActions({
+            resetPassword: 'auth/resetPassword'
+        }),
+        reset() {
+            const token = this.$route.params.token;
+            this.resetPassword({...this.user, token});
             this.visibleErrors();
-        },
-        checkUserState() {
-            this.$store.dispatch('auth/setLoggedInState');
         },
         getAllErrors() {
             let allErrors = this.errors;
