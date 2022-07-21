@@ -36,4 +36,8 @@ export default {
     border: 2px solid var(--color-primary-light);
     margin: 10px;
 }
+
+h2 {
+    color: red;
+}
 </style>

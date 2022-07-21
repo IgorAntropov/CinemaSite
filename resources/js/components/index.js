@@ -4,6 +4,7 @@ import Header from "./common/Header";
 import Footer from "./common/Footer";
 import ValidationNotification from "./common/ValidationNotification";
 import CinemaHallInfo from "./cinema/CinemaHallInfo";
+import NewsPost from "./news/NewsPost";
 
 export default [
     Button,
@@ -11,5 +12,6 @@ export default [
     Header,
     Footer,
     ValidationNotification,
-    CinemaHallInfo
+    CinemaHallInfo,
+    NewsPost
 ]

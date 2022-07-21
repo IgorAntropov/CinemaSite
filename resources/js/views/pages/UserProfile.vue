@@ -3,7 +3,8 @@
         <div class="user-card">
             <div class="border">
                 <div class="avatar">
-                    <img src="" alt="" />
+                    <img src="" alt="" @click.prevent="clickUploadImage" />
+                    <input type="file" accept="image/jpeg, image/gif, image/png" id="uploadFile"  @change="onFileChange"/>
                 </div>
                 <hr />
                 <div class="flex-center">
@@ -43,6 +44,41 @@ export default {
     },
     created() {
         this.$store.dispatch('auth/currentUser');
+    },
+    methods: {
+        clickUploadImage: function (e) {
+            document.getElementById('uploadFile').click();
+        },
+        onFileChange: function(e) {
+            let files = e.target.files || e.dataTransfer.files;
+
+            if (!files.length)
+                return;
+
+            this.createImage(files[0]);
+        },
+        createImage: function(file) {
+            let reader = new FileReader();
+            let vm = this;
+
+            reader.onload = function(e) {
+                vm.image = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+
+            this.upload();
+        },
+        upload: function(){
+            let data = new FormData();
+            let self = this;
+
+            data.append('file', this.image);
+            data.append('sizes', this.sizes);
+            data.append('root', 'uploads/test');
+
+            //отправка на бек и дальнейшая обработка
+        }
     }
 }
 </script>
@@ -50,6 +86,12 @@ export default {
 <style scoped lang="scss">
 hr {
     margin: 0 30px;
+}
+
+img {
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
 }
 
 .avatar {
@@ -82,5 +124,9 @@ h2 {
 
 p {
     font-size: 16px;
+}
+
+#uploadFile {
+    display: none;
 }
 </style>
