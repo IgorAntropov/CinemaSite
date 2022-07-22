@@ -1,6 +1,6 @@
 <template>
     <Container>
-        <div class="user-card">
+        <div class="user-card flex-center">
             <div class="border">
                 <div class="avatar">
                     <img src="" alt="" @click.prevent="clickUploadImage" />
@@ -84,6 +84,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.user-card {
+    min-height: calc(100vh - 150px);
+    max-height: calc(100vh - 150px);
+}
+
 hr {
     margin: 0 30px;
 }

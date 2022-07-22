@@ -37,6 +37,8 @@
                 <h2>Время работы касс</h2>
                 <p>
                     пн.-пт. с 09:30 до начала последнего сеанса.
+                </p>
+                <p>
                     сб.-вс. с 09:00 до начала последнего сеанса.
                 </p>
             </div>
@@ -81,12 +83,20 @@ export default {
     flex: 50%;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    width: calc((100vw - 50px));
     padding: 0 30px;
 }
 
 .general-info {
     justify-content: start;
+
+    @media only screen and (max-width: 767px) {
+
+    }
+}
+
+p, h2 {
+    text-align: justify;
 }
 
 .sub-info {

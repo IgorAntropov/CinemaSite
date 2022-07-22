@@ -1,7 +1,7 @@
 <template>
     <custom-header></custom-header>
 
-    <div class="container flex-center">
+    <div class="container">
         <slot></slot>
     </div>
 
