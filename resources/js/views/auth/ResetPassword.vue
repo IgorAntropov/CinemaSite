@@ -4,9 +4,9 @@
 
         <div class="auth-page">
             <form>
-                <custom-input type="text" placeholder="E-mail" v-model="user.email"/>
-                <custom-input type="text" placeholder="Новый пароль" v-model="user.password" />
-                <custom-input type="text" placeholder="Подтвердите пароль" v-model="user.password_confirmation" />
+                <custom-input type="email" placeholder="E-mail" v-model="user.email"/>
+                <custom-input type="password" placeholder="Новый пароль" v-model="user.password" />
+                <custom-input type="password" placeholder="Подтвердите пароль" v-model="user.password_confirmation" />
                 <custom-button type="submit" @click.prevent="reset">Сбросить пароль</custom-button>
                 <router-link to="/login"> <p class="message">На страницу авторизации? <a href="#">Войти</a></p> </router-link>
             </form>

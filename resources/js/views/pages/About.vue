@@ -83,7 +83,7 @@ export default {
     flex: 50%;
     flex-direction: column;
     align-items: flex-start;
-    width: calc((100vw - 50px));
+    width: calc(100vw - 50px);
     padding: 0 30px;
 }
 

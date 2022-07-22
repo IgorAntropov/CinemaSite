@@ -1,8 +1,8 @@
 <template>
     <Container>
-        <div class="posters-page flex-center">
-            Posters
-        </div>
+        <custom-common-layout>
+            <h2>Афиша</h2>
+        </custom-common-layout>
     </Container>
 </template>
 
@@ -18,8 +18,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.posters-page {
-    min-height: calc(100vh - 150px);
-    max-height: calc(100vh - 150px);
-}
+
 </style>

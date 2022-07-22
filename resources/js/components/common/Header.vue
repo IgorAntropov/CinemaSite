@@ -1,25 +1,25 @@
 <template>
     <div class="header flex-center">
-        <div>
-            <router-link to="/dashboard">Расписание</router-link>
+        <div class="dashboard-tab">
+            <router-link @click.prevent="changeTab" to="/dashboard">Расписание</router-link>
         </div>
-        <div>
-            <router-link to="/posters">Афиша</router-link>
+        <div class="posters-tab">
+            <router-link @click.prevent="changeTab" to="/posters">Афиша</router-link>
         </div>
-        <div>
-            <router-link to="/news">Новости</router-link>
+        <div class="news-tab">
+            <router-link @click.prevent="changeTab" to="/news">Новости</router-link>
         </div>
-        <div>
-            <router-link to="/about">О кинотеатре</router-link>
+        <div class="about-tab">
+            <router-link @click.prevent="changeTab" to="/about">О кинотеатре</router-link>
         </div>
-        <div v-if="this.$store.getters.auth.loggedIn" class="icon-div" title="Личный кабинет">
-            <router-link to="/profile" class="flex-center"><i class="material-icons">account_circle</i></router-link>
+        <div v-if="this.$store.getters.auth.loggedIn" class="profile-tab icon-div" title="Личный кабинет">
+            <router-link @click.prevent="changeTab" to="/profile" class="flex-center"><i class="material-icons">account_circle</i></router-link>
         </div>
         <div v-if="!this.$store.getters.auth.loggedIn" class="icon-div" title="Войти">
-            <router-link to="/login" class="flex-center"><i class="material-icons">login</i></router-link>
+            <router-link @click.prevent="changeTab" to="/login" class="flex-center"><i class="material-icons">login</i></router-link>
         </div>
         <div v-if="this.$store.getters.auth.loggedIn" class="icon-div" title="Выйти" @click="logout">
-            <a href="#" class="flex-center"><i class="material-icons">logout</i></a>
+            <a @click.prevent="changeTab" href="#" class="flex-center"><i class="material-icons">logout</i></a>
         </div>
     </div>
 </template>
@@ -30,12 +30,38 @@ export default {
     created() {
         this.checkUserState();
     },
+    mounted() {
+        this.chooseTab();
+    },
     methods: {
+        changeTab(event) {
+            let target = event.target;
+            let parent = '';
+
+            if (target.localName !== 'div') {
+                parent = target.parentNode;
+            } else {
+                parent = target;
+            }
+
+            if (parent.localName !== 'div') {
+                parent = parent.parentNode;
+            }
+
+            let tabName = parent.classList[0];
+
+            this.$store.dispatch('changeCurrentTab', tabName);
+        },
         logout() {
             this.$store.dispatch('auth/logout');
         },
         checkUserState() {
             this.$store.dispatch('auth/setLoggedInState');
+        },
+        chooseTab() {
+            let currentTab = this.$store.getters.currentTab;
+
+            document.getElementsByClassName(currentTab)[0].classList.add('current-tab');
         }
     }
 }
@@ -80,6 +106,10 @@ export default {
 
 .header div:hover,
 .header a:hover {
+    background-color: var(--color-primary-light);
+}
+
+.current-tab {
     background-color: var(--color-primary-light);
 }
 </style>

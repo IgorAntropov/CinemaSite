@@ -5,9 +5,9 @@
         <div class="auth-page">
             <form>
                 <custom-input type="text" placeholder="Имя пользователя" v-model="user.name" />
-                <custom-input type="text" placeholder="E-mail" v-model="user.email" />
-                <custom-input type="text" placeholder="Пароль" v-model="user.password" />
-                <custom-input type="text" placeholder="Подтвердите пароль" v-model="user.password_confirmation" />
+                <custom-input type="email" placeholder="E-mail" v-model="user.email" />
+                <custom-input type="password" placeholder="Пароль" v-model="user.password" />
+                <custom-input type="password" placeholder="Подтвердите пароль" v-model="user.password_confirmation" />
                 <custom-button type="submit" @click.prevent="register">Регистрация</custom-button >
                 <router-link to="/login"> <p class="message">Уже зарегистрирован? <a href="#">Войди!</a></p> </router-link>
             </form>

@@ -4,7 +4,7 @@
 
         <div class="auth-page">
             <form>
-                <custom-input type="text" placeholder="E-mail" v-model="user.email"/>
+                <custom-input type="email" placeholder="E-mail" v-model="user.email"/>
                 <custom-button type="submit" @click.prevent="forgot">Восстановить пароль</custom-button>
                 <router-link to="/login"> <p class="message">На страницу авторизации? <a href="#">Войти</a></p> </router-link>
             </form>
